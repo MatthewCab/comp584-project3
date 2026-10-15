@@ -18,11 +18,13 @@ a {
 	color: #2772B0;
 }
 .wrapper {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-flow: row;
+	grid-gap: 10px;
 	width: 97%;
 	max-width: 1200px;
 	margin: 0 auto;
-	float: none;
-	background-color: #fff;
 }
 
 div img {
@@ -30,98 +32,111 @@ div img {
 	max-width: 225px; 
 }
 
+
+
 /* grid system -- mobile first! */
-/* flex contatiner */
-
-.row {
-	display: flex;
-	flex-flow: row wrap;
+.wrapper {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+	width: 97%;
+	max-width: 1200px;
+	margin: 0 auto;
 }
-
-/* attribute selector to give some margin between columns and apply styles to flex items */
-
-[class*="col-"] {
-	margin-left: 4%;
-	flex: 0 0 92%;
-}
-
-/* Add background colors to see how much space each column is taking */
-
-.col-1 {
+.col-1 article {
 	background-color: #dbd800;
 }
-
-.col-2 {
+.col-2 article{
 	background-color: #fff39a;
 }
-
-.col-3 {
+.col-3-item-1 {
+	background-color: #dbd800;
+}
+.col-3-item-2 {
 	background-color: #98d8fd;
 }
-
-.col-4 {
+.col-4{
 	background-color: #f8a427;
 }
-
-.col-5 {
+.col-5-item-1,
+.col-5-item-3 {
+	background-color: #dbd800;
+}
+.col-5-item-2 {
+	background-color: #fff39a;
+}
+.col-6 article {
 	background-color: #ffad50;
 }
 
 /* Tablet Landscape Screen Sizes */
 @media only screen and (min-width: 480px)  and (max-width: 767px){
-	
-  .col-1,
-  .col-2,
-  .col-5 {
-		flex: 0 0 44%;
+	.wrapper {
+		grid-template-columns: repeat(2, 1fr);
 	}
-
-  .col-3,
-  .col-4{
-		flex: 0 0 92%;
-	}
-
-  /* both .row:has expressions are to create the specific layouts in the tablet.png example*/
-  /* this one can be in any order as long as its col-1 and col-3*/
-  .row:has(> .col-1):has(> .col-3) .col-1 {
-	flex: 0 0 92%;
-  }
-
-  /* this one has to be in the specific col-1, col-2, col-1 order in order to be applied */
-  /*order moves col-2 to the left in the current order allowing for display order col-2, col-1, col-1 when in tablet mode like in the tablet.png example*/
-  .row:has(> .col-1 + .col-2 + .col-1) .col-2 {
-	flex: 0 0 92%;
-	order: -1;
-  }
   
 }
 
 /* Desktop screen Sizes */
 @media only screen and (min-width: 768px) {
+
+	.wrapper {
+		grid-template-columns: repeat(4, 1fr);
+	}
   
-    /* fits 4 in a row */
- 	.col-1 {
-		flex: 0 0 20%;
+	.col-1{
+		display: contents;
 	}
-  
-	/* fits 2 in a row */
-	.col-2 {
-		flex: 0 0 44%;
+	.col-1 article {
+		grid-column: span 1;
+		background-color: #dbd800;
 	}
 
-	/* fits 1 in a row but can work with col-1*/
-	.col-3 {
-		flex: 0 0 68%;
+	.col-2{
+		display: contents;
+	}
+	.col-2 article{
+		grid-column: span 2;
+		background-color: #fff39a;
 	}
 
-	/* fits 1 in a row */
-	.col-4 {
-		flex: 0 0 92%;
+	.col-3{
+		display: contents;
+	}
+	.col-3-item-1 {
+		grid-column: 1/2;
+		background-color: #dbd800;
+	}
+	.col-3-item-2 {
+		grid-column: 2/5;
+		background-color: #98d8fd;
 	}
 
-	/*fits 6 in a row */
-	.col-5 {
-		flex: 0 0 12%;
+	.col-4{
+		grid-column: 1/5;
+		background-color: #f8a427;
 	}
 
+	.col-5{
+		display: contents;
+	}
+	.col-5-item-1,
+	.col-5-item-3 {
+		grid-column: span 1;
+		background-color: #dbd800;
+	}
+	.col-5-item-2 {
+		grid-column: 2/4;
+		background-color: #fff39a;
+	}
+
+	.col-6 {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0,1fr));
+		grid-gap: 10px;
+		grid-column: 1/-1;
+	}
+	.col-6 article {
+		background-color: #ffad50;
+	}
 }
